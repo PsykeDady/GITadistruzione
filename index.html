@@ -4,11 +4,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Guida GIT</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
@@ -16,9 +17,521 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section data-visibility="hidden">Slide X</section>
-				<section>Slide 2</section>
+				<section data-markdown data-background-image="assets/blwallpaper_dark.png" data-background-size="contain"
+				data-background-repeat="no-repeat">
+					<script type="text/template">
+						![](./assets/quakuslogodark.png)
+
+						&nbsp;  
+						A cura di Davide Galati (in arte PsykeDady)<!-- .element class="text-start h5 text-white-50 m-5"-->  
+						davide.galati@brainylabs.it<!-- .element class="text-start h5 text-white-50 m-5"-->  
+						psdady@msn.com<!-- .element class="text-start h5 text-white-50 m-5"-->  
+					</script>
+				</section>
+
+				<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+					data-background-size="contain" data-background-repeat="no-repeat">
+					### Link e info presentazione
+
+					- Potete trovare la presentazione all'indirizzo
+					[gitadistruzione.surge.sh](http://gitadistruzione.surge.sh)
+					- Con il tasto ESC avrete una panoramica di tutte le slide (*non fatevi spoiler però!*)
+					- Aggiungendo [?print-pdf](http://gitadistruzione.surge.sh) all'indirizzo potrete avere una
+					versione da stampare come pdf (dopo averla aperta stampate la pagina col browser).
+					- La presentazione si estende in *orizzontale* ma anche in **verticale**! Fare attenzione alle frecce
+					**a sinistra in basso**.
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png" 
+					data-background-size="contain" data-background-repeat="no-repeat">
+					<h3>Sistema di controllo delle versioni</h3>
+					<br>
+					<section data-markdown class="small">
+						- *un sistema di controllo versioni* è un software che gestisce **l'evoluzione di un progetto**, o più comunemente di una folder directory del nostro file system.  
+						- Ne confronta le varie versioni, tiene traccia dei cambiamenti per singoli file e per singola release.
+						- approccio particolarmente adottato nei progetti di programmazione.
+						- consente di tenere traccia degli autori delle modifiche 
+						- gestisce i conflitti nelle modifiche in contemporanea
+						- consente di annullare delle modifiche specifiche.
+
+					</section>
+					<section data-markdown class="small">
+						- Una delle peculiarità di git è che può significare di tutto, Anche *Idiota*!
+						-  creato da **Linus Torvalds**. Sì, proprio lui, quello di Linux. 
+						- Gli obiettivi di Linus erano tre:
+							- creare un sistema di versioning che gestisse la concorrenza
+							- che fosse distribuito
+							- resistente ad eventuali modifiche errate o addirittura maliziose
+					</section>
+					<section data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+
+						<img src="assets/fuck_you_linus.jpeg" alt="" style="max-width:40%;height:auto;display:block;margin:0 auto;">
+
+						<blockquote><i>FUCK YOU NVIDIA</i></blockquote>
+					</section>
+				</section>
+				<section data-background-image="assets/blwallpaper_dark_down.png" data-background-size="contain"
+					data-background-repeat="no-repeat">
+					<h3>Il nome</h3>
+					<section data-markdown class="small">
+						Se qualcuno ha mai aperto le pagine di manuale di git forse avrà notato che la descrizione del software è (cito letteralmente):
+
+						> the stupid content tracker
+					</section>
+
+					<section data-markdown class="small">
+						### Perché stupido?
+
+						- **Git** significa infatti "idiota" o "stupido" in alcuni slang britannici.  
+						- Linus, che si definisce essere un "egoistico bastardo" a tal punto da volere che i suoi progetti si chiamino come lui
+						- decide quindi di "darsi dello stupido" chiamando il progetto *git*.
+						- Ma questo in realtà è solo l'inizio, infatti questo nome nasconde diversi significati.
+					</section>
+
+					<section data-markdown class="small">
+						Sullo stesso [file README di github](https://github.com/git/git) si può leggere:
+
+						```plain
+						Il nome "git" è stato dato da Linus Torvalds quando ha scritto la prima versione. Lo descrisse come "lo stupido tracciatore di contenuti", ed il significato del suo nome varia in base al tuo umore:
+
+						- è una combinazione facilmente pronunciabile di tre caratteri, non ancora utilizzato da nessun comando UNIX. Il fatto che sia una storpiatura di "get" può essere rilevante o meno.
+
+						- stupido, spregevole, insopportabile. Scegline una dal dizionario dello slang. 
+
+						- semplice 
+
+						- acronimo di Global Information Tracker (Gestore di informazioni globale) se sei di buon umore e se attualmente pensi che funziona, se gli angeli cantano e la tua camera si riempie di luce!
+
+						- Goddamn Idiot Truckload of shit (Fottuto ammasso di stronzate) quando si rompe 
+						```
+					</section>
+
+					<section data-markdown class="small" data-background-image="assets/blwallpaper_dark_right.png" data-background-size="contain"
+					data-background-repeat="no-repeat">
+						In poche parole, git non ha un significato, ma in base alla situazione potete dargliene uno voi.
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Comprendere GIT</h2>
+					<section data-markdown class="small">
+						- `Git` è abbastanza banale da usare nelle operazioni quotidiane, ma è prima necessario comprendere la struttura su cui è basato.
+
+						- È un sistema di <u>controllo delle versioni distribuito</u>;
+
+						- Git salva delle snapshot (blob binari ) dello stato del progetto, organizza i dati in oggetti e pacchetti compressi, utilizzando anche meccanismi di compressione a delta (ovvero memorizzando solo le differenze tra le versioni) per ottimizzare lo spazio.
+					</section>
+
+					<section data-markdown class="small">
+						Git prevede 3 stati di memorizzazione per i file:
+						- **Working directory**: dove modifichiamo e creiamo i file.
+						- **Staging area (index)**: dove selezioniamo le modifiche da includere nel prossimo commit.
+						- **Repository locale**: dove Git salva uno snapshot permanente del progetto.
+						- **Repository remoto**: dove i commit possono essere inviati per la condivisione e la collaborazione.
+					</section>
+					<section data-markdown class="small">
+						![Working staging repo base](assets/working-staging-repo_base.png)
+					</section>
+					<section data-markdown class="small">
+						![la struttura delle directory git](/assets/WorkVSStageVSRepo.png)
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						Quando si punta ad un <u>*repository remoto*</u>, gli scambi di codici con quello locale son detti:
+
+						- <u>operazione di **pull**</u>, se in download da remoto a locale.
+						- <u>operazione di **push**</u>, se in upload da locale a remoto.
+					</section>
+				</section>
+
+				<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+					data-background-size="contain" class="small" data-background-repeat="no-repeat">
+					### Remoto?
+
+					- Nel caso di Git, "remoto" è una parola un po’ fuorviante.
+
+					- Git può collegarsi ad un altro repository tramite un URL e scambiarsi commit,
+					integrando le rispettive storie del progetto.
+
+					- L’URL può essere sia una cartella locale, sia un indirizzo di rete (server, GitHub, ecc.).
+
+					- Questo permette, ad esempio, di sincronizzare i progetti anche tramite una cloud dati.
+
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h4>Creazione e configurazione repository</h4>
+					<section data-markdown class="small">
+						#### Crea un repository
+
+						- `mkdir nomeprogetto`
+						- `cd $_`
+						- Creazione repository: 
+							- repository normale: `git init`
+							- repository minimale: `git init --bare`
+						- Varianti:
+							- specificare branch: `git init --initial-branch=main`
+							- clone: `git clone`
+					</section>
+					<section data-markdown class="small">
+						#### Repository minimale
+
+						- Normalmente sul proprio laptop si creano dei repository "*completi*", ovvero che contengono tanto il codice quanto la parte controllata da GIT.  
+						- Il repository remoto lo si trova soprattutto nell'ottica di voler creare un repository remoto verso cui fare pull/push 
+						- In questo contesto non si ha la necessità di avere anche il codice, ma solo i file necessari a git per ricostruire la storia.
+						- la cartella `.git` è un repository minimale.
+					</section>
+					<section data-markdown class="small">
+						![A sinistra il progetto, a destra il repository](assets/projVSrepo.png)
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						#### Configurare un remote
+						
+						- un repository remoto per essere utilizzato all'interno del progetto deve essere configurato tramite il comando `git remote add nome url`
+						- Quando si clona un repository, questo viene automaticamente configurato come remoto con il nome `origin`.
+						- Si può impostare più di un remote (tecnica usata nel caso di fork per riallineare il proprio repository con quello originale).
+					</section>
+				</section>
+				
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Configurazione locale</h2>
+					<section data-markdown class="small">
+						- `git config` è il comando che permette di configurare git (e.g. nome, email, editor di testo, ecc.).
+						- `git config --global` lo configura a prescindere dal repository, mentre `git config` lo configura solo per il repository in cui viene eseguito.
+						- Prima di eseguire un commit è necessario configurare almeno il nome e l'email, altrimenti git non permetterà di eseguire il commit.
+						- Da notare che né il nome né l'email devono corrispondere al nome mostrato sulla piattaforma di hosting remoto.
+					</section>
+					<section data-markdown class="small">
+						### GIT config
+
+						```
+						# Configurazione globale di nome
+						git config --global user.name "Nome che appare nei commit"
+						# Configurazione globale di email
+						git config --global user.email "email@dominio.com"
+						```
+					</section>
+
+					<section data-markdown class="small">
+						### GIT config altre operazioni
+
+						```
+						# Configurazione globale di editor e merge tool
+						git config --global core.editor [comando che avvia l'editor]
+						git config --global merge.tool [comando che avvia lo strumento di merge]
+						```
+					</section>
+						
+					<section data-markdown class="small">
+						### SSH
+						- Per comunicare con un repository remoto è necessario autenticarsi.
+						- Alcuni strumenti ti permettono di farlo attraverso un sistema di token e autenticazione tramite pagina web
+						- Il metodo più comune e raccomandato è però quello di autenticarsi tramite chiavi SSH.
+						- Non ha senso scrivere qui il metodo di connessione ssh, la [documentazione ufficiale](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) è molto chiara e completa.
+					</section>
+					<section data-markdown class="small">
+						 ### Più chiavi ssh
+
+						 - Se si ha la necessità di utilizzare più chiavi ssh (ad esempio per accedere a più account su GitHub) è possibile farlo configurando il file `~/.ssh/config`
+						 - in fase di creazione di una chiave ssh è possibile specificare un nome per la chiave, ad esempio `id_rsa_github_personale` e `id_rsa_github_lavoro`
+						 - Successivamente nel file di configurazione ssh è possibile specificare quale chiave utilizzare per ogni host
+					</section>
+					<section data-markdown class="small">
+						### Esempio di ssh config
+						```
+						Host nomeprofilo
+						 HostName NOME HOST (es. github.com)
+						 IdentityFile ~/.ssh/nomechiave (es. ~/.ssh/id_rsa_github_personale)
+						```
+					</section>
+					<section data-markdown class="small">
+						### Git Clients
+						- clients dedicati, IDE, terminale; i modi per accedere a git sono molteplici, ognuno con i suoi pro e contro.
+						- I client dedicati sono spesso i più semplici, meno flessibili rispetto a terminale ma più rispetto ad IDE.
+						- Gli IDE (es. Visual Studio Code, IntelliJ, ecc.) hanno spesso un supporto sufficiente, ma non completo.
+						- Il terminale è il modo più completo e flessibile per accedere a git, ma anche il più complesso da utilizzare.
+						- Usa quello che ti senti più a tuo agio, ma cerca di conoscere almeno le basi del terminale.
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						class="small"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						### Gitk e strumenti integrati
+
+						- Gitk è uno strumento grafico incluso in git che permette di visualizzare la storia del progetto, i branch, i commit, ecc.
+						- In genere ogni sistema operativo fornisce degli strumenti (che siano da installare o meno) che coprono alcune funzionalità di git
+						- Ad esempio MELD (linux), WinMerge (Windows) son molto utili per visualizzare le differenze tra i file, soprattutto in caso di conflitti. 
+						- *Ogni cowboy ha la sua pistola*.
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Operazioni base</h2>
+					<section data-markdown class="small">
+						- `git status` per vedere lo stato del repository
+						- `git add [file]` per aggiungere i file alla staging area
+						- `git add .` per aggiungere tutti i file modificati alla staging area
+						- `git commit` per creare un commit con i file nella staging area
+						- `git commit percorso/file` per creare un commit con uno o più file specifici
+						- `git commit -m "messaggio"` per creare un commit con un messaggio specifico
+					</section>
+					<section data-markdown class="small">
+						### rimozione modifiche
+						- `git checkout -- [file]` per annullare le modifiche a un file (riporta il file alla versione dell'ultimo commit)
+						- `git reset --hard` per annullare tutte le modifiche 
+						- `git clean -xdf` per rimuovere i file non tracciati
+						- `git commit --amend` per modificare l'ultimo commit 
+						- `git revert [commit]` per annullare un commit specifico (crea un nuovo commit che annulla le modifiche del commit specificato)
+
+					</section>
+					<section data-markdown class="small">
+						### Buone pratiche
+						- Fare commit frequenti e con messaggi chiari
+						- add molto specifici (evitare `git add .` se non si è sicuri di voler includere tutte le modifiche)
+						### Trivia: what the commit 
+						```bash
+						git commit -m "$(curl -s https://whatthecommit.com/index.txt)"
+						```
+					</section>
+					<section data-markdown class="small">
+						- `git log` per vedere la storia dei commit
+						- `git log --oneline` per vedere la storia dei commit linea per linea
+						- il log restituisce i sha del commit, che sono identificatori univoci per ogni commit 
+						- utili per revert, cherry-pick, ecc.
+					</section>
+					<section data-markdown class="small">
+						- commit aaaa123 - aggiunto file 1
+						- commit bbbb321 - aggiunto file 2
+						- commit c1aab12 - modificato file 1
+
+						Digitando:
+
+						```bash
+						git revert bbbb321
+						```
+
+						si ritornerà alla situazione in cui ancora *non è stato aggiunto il file 2*, ma in cui è ancora valido il **commit aaaa123**.
+
+						Se si aggiunge il parametro **-n** è possibile evitare il commit:
+
+						```bash
+						git revert -n codicecommit
+						```
+					</section>
+					<section data-markdown class="small">
+						- Per andare dal commit alla staging area ci son due metodi
+						- dal secondo commit in poi: `git reset --soft HEAD^`
+						- Nel caso del primo commit: `git update-ref -d HEAD`
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						Un piccolo riassunto di quanto detto:
+
+						![RiassuntoBaseC](assets/riassuntoBase.png)
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Comunicare con remote</h2>
+					<section data-markdown class="small">
+						- Se si ha impostato almeno un repository remoto, è possibile comunicare con esso tramite i comandi `fetch`, `pull` e `push`.
+						- A differenza di `pull` e `push`, `fetch` scarica solo i cambiamenti senza applicarli automaticamente.
+						- `pull` scarica i cambiamenti e li applica automaticamente al branch corrente
+						- mentre `push` carica i cambiamenti dal branch locale a quello remoto.
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+					class="small"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						- in fase di comunicazione con un repository remoto è possibile incorrere in *conflitti*, se nel frattempo altri utenti hanno effettuato modifiche.
+						- La maggior parte dei conflitti git riesce a risolverli automaticamente (in fase di `pull`).
+						- Senza un'adeguata strategia di merging, in fase di `pull` è necessario specificarla manualmente.
+						- `git pull --ff` ad esempio applica il fast forward e lascia gestire i conflitti più complessi all'utente.
+						- non è possibile fare `push` se nel frattempo altri utenti hanno fatto modifiche, è necessario prima fare `pull`, risolvere eventuali conflitti e poi fare `push`.
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Branch</h2>
+					<section data-markdown class="small">
+						- Lavorare bene con git significa anche saper gestire i branch, ovvero le linee di sviluppo parallele all'interno del progetto.
+						- I branch permettono di lavorare su funzionalità o bugfix in modo isolato
+					</section>
+					<section data-markdown class="small">
+						- `git branch` per vedere i branch esistenti
+						- `git branch nomebranch` per creare un nuovo branch
+						- `git checkout nomebranch` per spostarsi su un branch esistente
+						- `git checkout -b nomebranch` per creare e spostarsi su un nuovo branch
+						- `git branch -D nomebranch` per eliminare un branch
+					</section>
+					<section data-markdown class="small">
+						![Branching](assets/branch.png)
+					</section>
+					<section data-markdown class="small">
+						### Tag vs Branch
+
+						- `git tag nometag` per creare un nuovo tag
+						- i tag sono come i branch, ma non si spostano, sono fissi su un commit specifico
+						- i tag sono spesso usati per segnare le release del progetto
+						- i branch sono invece usati per lo sviluppo continuo
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						### Push pull tag e branch
+						- `git push origin nomebranch` per pushare un branch su remoto
+						- aggiungi `--set-upstream` per impostare il tracking del branch remoto
+						- `git push origin nometag` per pushare un tag su remoto
+						- `git push -d origin nomebranchotag` per eliminare un branch o un tag su remoto
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Branch Strategy</h2>
+					<section data-markdown class="small">
+						- Esistono delle convenzioni per la gestione dei branch.
+						- Gestire adeguatamente i branch aiuta lo sviluppi e la coordinazione tra i membri del team, soprattutto in progetti di grandi dimensioni.
+						- Alcuni strumenti riescono a gestire in autonomamente le versioni se presente una strategia di branching ben definita (es. GitFlow, GitHub Flow, ecc.).
+					</section>
+					<section data-markdown class="small">
+						- `main` o `master`: branch principale, stabile, pronto per la produzione
+						- `develop`: branch di sviluppo, dove vengono integrate le nuove funzionalità prima
+						- `feature/nomefeature`: branch per lo sviluppo di una nuova funzionalità
+						- `hotfix/versione`: branch per la correzione di un bug critico
+						- `release/versione`: branch per la preparazione di una nuova release
+						- `support/versione`: branch per la manutenzione di una vecchia versione
+					</section>
+					<section data-markdown class="small">
+						- `master` non si usa più, è stato sostituito da `main` per evitare connotazioni razziste
+						- Coordinati sempre con chi gestisce il team
+						- Alcuni sistemi permettono di bloccare il push su branch specifici (es. `main`) per evitare di fare modifiche direttamente su di essi
+						- La branch strategy va di pari passo con la numerazione delle release in genere.
+						- main &rarr; major (`1.0.0`), develop &rarr; minor (`1.1.0`), hotfix/release/support &rarr; patch (`1.1.1`)
+					</section>
+					<section data-markdown class="small">
+						- Strumenti come gitflow aiutano a gestire il versionamento del progetto 
+						- Gitflow è generalmente utilizzato attraverso plugin maven e permette di fare build e avanzamenti in contemporanea
+						- `mvn gitflow:release-start` per iniziare una nuova release
+						- `mvn gitflow:release-finish` per terminarla
+						- Il pom deve contenere la branch strategy per funzionare correttamente
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						```java
+						
+						```
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Operazioni avanzate</h2>
+					<section data-markdown class="small">
+						- merge
+						- rebase
+						- cherry-pick
+						- revert
+						- reset
+						- stash
+						- update-index
+						- bisect
+						- clean
+						- squash
+						- blame
+						- log
+						- diff
+						- tag
+						- submodule
+					</section>
+					<section data-markdown class="small">
+						### Merge o pull request
+
+						- le piattaforme di hosting remoto (Github, Gitlab, etc...), offrono diverse operazioni 
+						- le pull/merge request ad esempio che permettono di gestire la riconciliazione tra due branch
+						- 
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						### Fine slide verso sotto
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>📌 Titolo Generale</h2>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						### Fine slide verso sotto
+					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>📌 Titolo Generale</h2>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown class="small">
+						### Slide verso sotto
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						### Fine slide verso sotto
+					</section>
+				</section>
+
+				<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+					data-background-size="contain" class="small" data-background-repeat="no-repeat">
+					### Titolo 
+
+					- Slide verso destra
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark.png" 
+					data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>The End</h2>
+
+					<img src="assets/thanks.jpeg" alt="T.hanks">
+
+					<p>(T.hanks)</p>
+
+					<blockquote class="blockquote w-50 mx-auto">
+						<p class="mb-2 small text-light">La violenza non ha mai risolto nessun conflitto<br>
+						git merge --ff si!</p>
+						<footer class="blockquote-footer small mt-2"> Ghandit</footer>
+					</blockquote>
+				</section>
+
 			</div>
 		</div>
 
