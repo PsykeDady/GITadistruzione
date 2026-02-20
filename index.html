@@ -257,15 +257,18 @@
 						- Il terminale è il modo più completo e flessibile per accedere a git, ma anche il più complesso da utilizzare.
 						- Usa quello che ti senti più a tuo agio, ma cerca di conoscere almeno le basi del terminale.
 					</section>
-					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
-						class="small"
-						data-background-size="contain" data-background-repeat="no-repeat">
+					<section data-markdown class="small">
 						### Gitk e strumenti integrati
 
 						- Gitk è uno strumento grafico incluso in git che permette di visualizzare la storia del progetto, i branch, i commit, ecc.
 						- In genere ogni sistema operativo fornisce degli strumenti (che siano da installare o meno) che coprono alcune funzionalità di git
 						- Ad esempio MELD (linux), WinMerge (Windows) son molto utili per visualizzare le differenze tra i file, soprattutto in caso di conflitti. 
 						- *Ogni cowboy ha la sua pistola*.
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						class="small"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						![meme cli vs gui](assets/cligui_meme.png)
 					</section>
 				</section>
 
@@ -281,6 +284,7 @@
 						- Il file `.gitignore` è un file di testo che contiene una lista di pattern che indicano quali file o cartelle devono essere ignorati da git.
 						- I pattern possono essere specifici (es. `config.json`) o generici (es. `*.log` per ignorare tutti i file con estensione .log).
 						- Il file `.gitignore` deve essere posizionato nella root del repository e deve essere tracciato da git (ovvero deve essere incluso nei commit) per essere efficace.
+						- Se da un percorso escluso vuoi reincludere un file specifico utilizza `!percorso/file` (es. `!config/config.json` per reincludere il file config.json nella cartella config).
 					</section>
 					<section data-markdown class="small">
 						```plain 
@@ -292,8 +296,15 @@
 						*.class
 						# Ignora le properties di eclipse 
 						.project/	
+						# Reincludi un file da project
+						!.project/config.json
 						```
 					</section>
+					<section>
+					<img src="assets/gitignore_meme.png"
+						style="max-width:80%; max-height:80vh; display:block; margin:0 auto;">
+					</section>
+				
 
 					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
 						class="small"
@@ -385,14 +396,22 @@
 						- `pull` scarica i cambiamenti e li applica automaticamente al branch corrente
 						- mentre `push` carica i cambiamenti dal branch locale a quello remoto.
 					</section>
-					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
-					class="small"
-						data-background-size="contain" data-background-repeat="no-repeat">
+					<section data-markdown class="small">
 						- in fase di comunicazione con un repository remoto è possibile incorrere in *conflitti*, se nel frattempo altri utenti hanno effettuato modifiche.
 						- La maggior parte dei conflitti git riesce a risolverli automaticamente (in fase di `pull`).
 						- Senza un'adeguata strategia di merging, in fase di `pull` è necessario specificarla manualmente.
 						- `git pull --ff` ad esempio applica il fast forward e lascia gestire i conflitti più complessi all'utente.
 						- non è possibile fare `push` se nel frattempo altri utenti hanno fatto modifiche, è necessario prima fare `pull`, risolvere eventuali conflitti e poi fare `push`.
+					</section>
+					
+					<section data-background-image="assets/blwallpaper_dark_right.png"
+							data-background-size="contain"
+							data-background-repeat="no-repeat"
+							class="small">
+
+					<img src="assets/pullpush_meme.png"
+						style="max-width:80%; max-height:50vh; display:block; margin:0 auto;">
+
 					</section>
 				</section>
 
@@ -573,26 +592,35 @@
 				</section>
 
 
-				<section data-background-image="assets/blwallpaper_dark_down.png"
+				<section data-background-image="assets/blwallpaper_dark_right.png"
 						data-background-size="contain" data-background-repeat="no-repeat">
 					<h2>Operazioni avanzate</h2>
 					<section data-markdown class="small">
 						- Non è possibile affrontare tutte le operazioni avanzate di git in una sola presentazione.
 						- Qui di seguito ne saranno elencate alcune reputate utili dal presentatore.
 					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h3>Cherry-pick</h3>
 					<section data-markdown class="small">
-						### Cherry-pick
 						- Tramite `git cherry-pick codicecommit` è possibile applicare le modifiche di un commit specifico su un branch diverso da quello in cui è stato creato.
 						- Il commit prelevato non genera conflitti in caso di merge con un branch che lo contiene già.
 					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h3>Stash</h3>
 					<section data-markdown class="small">
-						### Stash
 						- Git possiede memorizza uno stack di "commit" che è possibile applicare o rimuovere.
 						- Questa funzionalità (`stash`) è utilissima in diverse occasioni
 						- Si ha una modifica locale non terminata che genera conflitti con una pull, ma non si vuole fare un commit
 						- Stesso caso se ci si vuole spostare di branch.
-					</section>					
-					<section data-markdown class="small">
+					</section>
+					<section data-markdown class="small" data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
 						### Stash comandi
 						```sh
 						##per salvare le modifiche non ancora committate
@@ -609,86 +637,258 @@
 						git stash drop 
 						```
 					</section>
+				</section>
+
+				<section data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h3>Update-index</h3>
 					<section data-markdown class="small">
-						#### Update-index
 						- `git update-index` è un comando che permette di aggiornare l'indice
 						- Come usarlo? Un caso utile è quello dei files di configurazione.
 						- Se si ha un file di configurazione non in gitignore ma che necessita modifiche (file env ad esempio, o package-lock.json) è possibile usare dire a git di ignorarlo aggiornando l'indice.
 						- `git update-index --assume-unchanged file`
 						- `git update-index --no-assume-unchanged file` per tornare alla situazione precedente
-					</section>	
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>	
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>					
-					<section data-markdown class="small">
-						- bisect
-						- squash
-						- blame
-						- diff
-						- submodule
-					</section>
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>
-					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
-						data-background-size="contain" data-background-repeat="no-repeat">
-						### Fine slide verso sotto
 					</section>
 				</section>
 
 				<section data-background-image="assets/blwallpaper_dark_down.png"
 						data-background-size="contain" data-background-repeat="no-repeat">
-					<h2>📌 Titolo Generale</h2>
+					<h2>Bisect</h2>
 					<section data-markdown class="small">
-						### Slide verso sotto
+						- `git bisect` è una ricerca binaria del bug. 
+						- non è sempre possibile l'applicazione di questa tecnica, ma quando è possibile è molto efficace.
+						- Si parte da un commit "buono" e uno "cattivo"
+						- Si fa il checkout del commit a metà tra i due e si verifica se il bug è presente o meno
+						- Se il bug è presente, il commit "cattivo" diventa quello, si reitera con la nuova lista
+						- Se il bug non è presente, il commit "buono" diventa quello, si reitera con la nuova lista
 					</section>
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>
-					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+					<section data-background-image="assets/blwallpaper_dark_right.png"
 						data-background-size="contain" data-background-repeat="no-repeat">
-						### Fine slide verso sotto
+							<img src="assets/bisect_meme.png" alt="bisect meme" style="max-width:80%; max-height:50vh; display:block; margin:0 auto;">
 					</section>
 				</section>
 
 				<section data-background-image="assets/blwallpaper_dark_down.png"
 						data-background-size="contain" data-background-repeat="no-repeat">
-					<h2>📌 Titolo Generale</h2>
+					<h2>Squash</h2>
 					<section data-markdown class="small">
-						### Slide verso sotto
+						- `git squash` è una tecnica che permette di unire più commit in uno solo.
+						- Questa tecnica è molto utile per mantenere una storia pulita e comprensibile.
+						- è spesso utilizzata in fase di merge con branch di features.
+						- Si può con `git merge` o `git rebase`, oppure con `git reset` e `git commit`.
+					</section>
+					<section class="small">
+						<img src="assets/squash_meme.png" alt="squash meme" style="max-width:80%; max-height:50vh; display:block; margin:0 auto;">
 					</section>
 					<section data-markdown class="small">
-						### Slide verso sotto
+						### Esempio con merge
+						
+						```sh
+						git checkout main
+						git merge --squash feature/nuovafunzionalità
+						```
+						- Tutti i commit di `feature/nuovafunzionalità` vengono uniti in un unico commit che viene applicato su `main`, ma non viene creato un nuovo commit di merge, è necessario fare un commit manuale per completare l'operazione.
+
+						```sh
+						git commit
+						```
+						- Il messaggio di commit conterrà la lista di tutti i commit uniti, è possibile modificarlo a piacimento.
 					</section>
-					<section data-markdown class="small">
-						### Slide verso sotto
-					</section>
-					<section data-markdown class="small">
-						### Slide verso sotto
+					<section data-markdown class="small" style="font-size: 0.5em;">
+						- esempio con rebase
+						```sh
+						git checkout feature/nuovafunzionalità
+						git rebase -i main
+						```
+						- Viene chiesto attraverso un messaggio di commit di specificare i diversi commit da unire
+						```sh
+						pick b195500 #  nuovo file:             ciao2
+						pick 40d2fb2 #  nuovo file:             ciao23
+						pick 5128e19 #  modificato:             Ciao
+
+						# Rebase di 501470d..5128e19 su 501470d (3 comandi)
+						#
+						# Commands:
+						# p, pick <commit> = use commit
+						# r, reword <commit> = use commit, but edit the commit message
+						# e, edit <commit> = use commit, but stop for amending
+						# s, squash <commit> = use commit, but meld into previous commit
+						# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+						#                    commit's log message, unless -C is used, in which case
+						#                    keep only this commit's message; -c is same as -C but
+						#                    opens the editor
+						# x, exec <command> = run command (the rest of the line) using shell
+						# b, break = stop here (continue rebase later with 'git rebase --continue')
+						# d, drop <commit> = remove commit
+						# l, label <label> = label current HEAD with a name
+						# t, reset <label> = reset HEAD to a label
+						# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+						#         create a merge commit using the original merge commit's
+						#         message (or the oneline, if no original merge commit was
+						#         specified); use -c <commit> to reword the commit message
+						# u, update-ref <ref> = track a placeholder for the <ref> to be updated
+						#                       to this position in the new commits. The <ref> is
+						#                       updated at the end of the rebase
+						#
+						# These lines can be re-ordered; they are executed from top to bottom.
+						#
+						# Rimuovendo una riga da qui IL COMMIT CORRISPONDENTE ANDRÀ PERDUTO.
+						#
+						# Ciò nonostante, se rimuovi tutto, il rebase sarà annullato.
+						#
+						```
 					</section>
 					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
 						data-background-size="contain" data-background-repeat="no-repeat">
-						### Fine slide verso sotto
+						- risultato 
+						```sh
+						pick b195500 #  nuovo file:             ciao2
+						squash 40d2fb2 #  nuovo file:             ciao23
+						squash 5128e19 #  modificato:             Ciao
+
+						# Rebase di 501470d..5128e19 su 501470d (3 comandi)
+						#
+						# Commands:
+						# p, pick <commit> = use commit
+						# r, reword <commit> = use commit, but edit the commit message
+						# e, edit <commit> = use commit, but stop for amending
+						# s, squash <commit> = use commit, but meld into previous commit
+						# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+						#                    commit's log message, unless -C is used, in which case
+						#                    keep only this commit's message; -c is same as -C but
+						#                    opens the editor
+						# x, exec <command> = run command (the rest of the line) using shell
+						# b, break = stop here (continue rebase later with 'git rebase --continue')
+						# d, drop <commit> = remove commit
+						# l, label <label> = label current HEAD with a name
+						# t, reset <label> = reset HEAD to a label
+						# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+						#         create a merge commit using the original merge commit's
+						#         message (or the oneline, if no original merge commit was
+						#         specified); use -c <commit> to reword the commit message
+						# u, update-ref <ref> = track a placeholder for the <ref> to be updated
+						#                       to this position in the new commits. The <ref> is
+						#                       updated at the end of the rebase
+						#
+						# These lines can be re-ordered; they are executed from top to bottom.
+						#
+						# Rimuovendo una riga da qui IL COMMIT CORRISPONDENTE ANDRÀ PERDUTO.
+						#
+						# Ciò nonostante, se rimuovi tutto, il rebase sarà annullato.
+						#
+						```
 					</section>
 				</section>
 
-				<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
-					data-background-size="contain" class="small" data-background-repeat="no-repeat">
-					### Titolo 
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Blame</h2>
+					<section data-markdown class="small">
+						- Incolpare qualcuno non è mai produttivo in un team.
+						- Tuttavia è di gran liberazione sapere chi è il maledetto.
+						- `git blame file` mostra chi ha modificato ogni riga di un file, quando e con quale commit.
+						- Scherzi a parte, è anche utile a capire chi ha informazioni sul codice scritto.
+					</section>
+					<section data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						<img src="assets/blame_meme.png" alt="blame meme" style="max-width:80%; max-height:60vh; display:block; margin:0 auto;">
+					</section>
+				</section>
 
-					- Slide verso destra
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>Diff e patch</h2>
+					<section data-markdown class="small">
+						- Una funzionalità di git molto sottovalutata è quella delle patch 
+						- `git diff` mostra le differenze tra due commit, o tra un commit e la working directory, o tra due branch.
+						- puoi salvare la diff in un file con `git diff > patch.diff` e applicarla con `git apply patch.diff`
+						- Esiste anche `git format-patch` che crea un file patch per ogni commit, e `git am` che applica una serie di patch create con `format-patch`
+					</section>
+					<section data-markdown class="small">
+						### Git diff e git apply commands
+						
+						```sh
+						##per vedere le differenze tra la working directory e l'ultimo commit e salvarle
+						git diff >> patch.diff
+						# Cambio di progetto/branch, ora applichiamo la patch 
+						git apply patch.diff
+						```
+
+					</section>
+					<section data-markdown class="small">
+						### Git format-patch e git am commands
+						
+						```sh
+						##per creare una patch per ogni commit tra main e feature/nuovafunzionalità
+						git format-patch main..feature/nuovafunzionalità
+						# Cambio di progetto/branch, ora applichiamo le patch
+						git am *.patch
+						```
+					</section>
+					<section data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						<img src="assets/patch_meme.png" alt="patch meme" style="max-width:80%; max-height:60vh; display:block; margin:0 auto;">
+					</section>
+				</section>
+				
+
+				<section data-background-image="assets/blwallpaper_dark_down.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+					<h2>I submodule di git</h2>
+					<section data-markdown class="small">
+					- I submodule di Git permettono di includere un repository Git all'interno di un altro repository.
+
+					- Sono utili quando si vuole integrare una libreria o un progetto esterno mantenendolo separato.
+
+					- Il repository principale non copia il codice del submodule,
+					ma mantiene un riferimento ad uno specifico commit di quel progetto.
+
+					- `git submodule add URL` per aggiungere un submodule  
+					- `git submodule update --init` per inizializzarlo
+					</section>
+					<section data-markdown class="small">
+					- Se il progetto principale si aggiorna, il submodule non viene modificato automaticamente:
+					rimane fermo al commit registrato.
+
+					- Questo garantisce stabilità e controllo sulle versioni.
+
+					- Se invece è necessario modificare realmente il submodule,
+					si può entrare nella sua directory, fare commit e push come in un repository normale,
+					e poi aggiornare il riferimento nel progetto principale.
+					</section>
+					<section data-markdown data-background-image="assets/blwallpaper_dark_right.png"
+						data-background-size="contain" data-background-repeat="no-repeat">
+						```sh
+						# Aggiunge un repository esterno come submodule
+						git submodule add URL percorso/del/submodule
+						# Registra il submodule nel progetto principale
+						git commit -m "Aggiunto submodule libreria"
+						
+						# Inizializza e scarica i submodule
+						git submodule update --init
+
+						# Aggiorna il submodule al commit più recente del branch configurato
+						git submodule update --remote
+
+						# Registra il nuovo riferimento nel progetto principale
+						git add libs/libreria
+						git commit -m "Aggiornato submodule"
+
+						# Entrare nella directory del submodule
+						cd libs/libreria
+						# Lavorare normalmente (add, commit, push)
+						git add .
+						git commit -m "Modifica nel submodule"
+						git push
+
+						# Tornare nel progetto principale
+						cd ../..
+
+						# Aggiornare il riferimento al nuovo commit
+						git add libs/libreria
+						git commit -m "Aggiornato riferimento submodule"
+						```
+					</section>
 				</section>
 
 				<section data-background-image="assets/blwallpaper_dark.png" 
@@ -705,7 +905,6 @@
 						<footer class="blockquote-footer small mt-2"> Ghandit</footer>
 					</blockquote>
 				</section>
-
 			</div>
 		</div>
 
